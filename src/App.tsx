@@ -82,12 +82,10 @@ const getCurrentLevel = (days: number) => {
 };
 
 const getMotivationalMessage = (days: number) => {
-  if (days < 3) return "You just started. Stay strong.";
-  if (days < 7) return "The hardest part is beginning. Keep going.";
-  if (days < 14) return "Momentum is building 🔥";
-  if (days < 30) return "You're building a new lifestyle.";
-  if (days < 90) return "You're ahead of most people.";
-  return "You are a master of your own mind.";
+  if (days <= 3) return "You just started. Stay strong.";
+  if (days <= 10) return "Momentum is building 🔥";
+  if (days <= 30) return "You're building real discipline";
+  return "You're ahead of most people.";
 };
 
 /**
@@ -601,8 +599,8 @@ export default function App() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="w-full max-w-md text-center z-10 mt-4 mb-6"
       >
-        <h1 className="text-2xl sm:text-3xl font-display font-bold text-white mb-1.5 tracking-tight">Free NoFap Streak Tracker</h1>
-        <p className="text-zinc-400 text-sm font-medium tracking-wide">No login • Private • Works offline</p>
+        <h1 className="text-2xl sm:text-3xl font-display font-bold text-white mb-1.5 tracking-tight">Track Your Discipline</h1>
+        <p className="text-zinc-400 text-sm font-medium tracking-wide">Free • Private • No login required</p>
       </motion.div>
 
       <main className="w-full max-w-md flex flex-col items-center z-10">
@@ -662,8 +660,13 @@ export default function App() {
             )}
           </div>
 
-          <div className="mt-10 max-w-xs text-center">
+          <div className="mt-10 max-w-xs text-center flex flex-col gap-2">
             <p className="text-zinc-300 font-medium text-base leading-relaxed tracking-wide">{getMotivationalMessage(days)}</p>
+            {startTime && (
+              <p className="text-emerald-400/80 text-xs font-bold uppercase tracking-widest animate-pulse">
+                Don't break the streak
+              </p>
+            )}
           </div>
         </motion.div>
 
@@ -862,7 +865,7 @@ export default function App() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.5 }}
-          className="w-full"
+          className="w-full mb-8"
         >
           <div className="flex items-center gap-2 mb-4 px-2">
             <Trophy className="w-5 h-5 text-yellow-500" />
@@ -899,6 +902,20 @@ export default function App() {
             })}
           </div>
         </motion.div>
+
+        {/* User Retention Hook */}
+        {startTime && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 1 }}
+            className="w-full text-center mt-4 mb-8"
+          >
+            <p className="text-zinc-500 text-xs font-medium tracking-wide">
+              Come back tomorrow to continue your streak
+            </p>
+          </motion.div>
+        )}
 
       </main>
 
